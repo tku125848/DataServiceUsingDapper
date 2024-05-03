@@ -10,18 +10,22 @@ namespace WebApplication2.DbContexts
 {
     public class TpContext : DbContext
     {
-        private readonly IConfiguration _configuration;
-        string _connstr = "";
-        public TpContext(IConfiguration configuration)
+        public TpContext(DbContextOptions<TpContext> options)
+        : base(options)
         {
-            _configuration = configuration;
-            _connstr = _configuration.GetConnectionString("TP");
         }
+        //private readonly IConfiguration _configuration;
+        //string _connstr = "";
+        //public TpContext(IConfiguration configuration)
+        //{
+        //    _configuration = configuration;
+        //    _connstr = _configuration.GetConnectionString("TP");
+        //}
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(_connstr);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(_connstr);
+        //}
         // List All Model Sets
         public DbSet<ISO3166> ISO3166s { get; set; }
 

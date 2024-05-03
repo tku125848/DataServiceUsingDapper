@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebApplication2.DataService;
+using WebApplication2.DbContexts;
 using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
@@ -9,10 +10,12 @@ namespace WebApplication2.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _configuration;
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
+        private readonly TpContext _context;
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration , TpContext context)
         {
             _logger = logger;
             _configuration = configuration;
+            _context = context;
         }
 
         public async Task<IActionResult> Index()
@@ -35,7 +38,7 @@ namespace WebApplication2.Controllers
         public async Task<IActionResult> IndexC()
         {
 
-            ISO3166DataServiceEF ds = new ISO3166DataServiceEF(_configuration);
+            ISO3166DataServiceEF ds = new ISO3166DataServiceEF(_context);
             List<ISO3166> list = new List<ISO3166>();
             try
             {
