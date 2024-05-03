@@ -6,7 +6,7 @@ namespace WebApplication2.DataService
     public class ISO3166DataService : IDataService<ISO3166>
     {
         private readonly IConfiguration _configuration;
-        private readonly string connectionName = "XX";
+        private readonly string connectionName = "TP";
         public ISO3166DataService(IConfiguration configuration) => _configuration = configuration;
        
 

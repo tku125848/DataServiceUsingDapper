@@ -32,6 +32,23 @@ namespace WebApplication2.Controllers
             return Ok(list);
         }
 
+        public async Task<IActionResult> IndexC()
+        {
+
+            ISO3166DataServiceEF ds = new ISO3166DataServiceEF(_configuration);
+            List<ISO3166> list = new List<ISO3166>();
+            try
+            {
+                string[] keys = { };
+                list = await ds.GetModelsAsync(keys);
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.ToString());
+            }
+            return Ok(list);
+        }
+
         public IActionResult Privacy()
         {
             return View();
