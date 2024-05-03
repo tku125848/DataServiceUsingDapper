@@ -3,14 +3,24 @@ using WebApplication2.Models;
 using Dapper;
 namespace WebApplication2.DataService
 {
-    public class ISO3166DataService : IDataService<ISO3166>
+    public class ISO3166DataServiceDP : IDataService<ISO3166>
     {
         private readonly IConfiguration _configuration;
         private readonly string connectionName = "TP";
-        public ISO3166DataService(IConfiguration configuration) => _configuration = configuration;
-       
+        public ISO3166DataServiceDP(IConfiguration configuration) => _configuration = configuration;
 
-        public async Task<List<ISO3166>> GetModelsAsync(params object[] keys)
+
+        public Task<ISO3166> CreateAsync(ISO3166 model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteAsync(params object[] keys)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<ISO3166>>  GetListAsync(params object[] keys)
         {
             List<ISO3166> list = new List<ISO3166>();
             string connectionString = string.Empty;
@@ -25,9 +35,26 @@ namespace WebApplication2.DataService
                 }
             }
             return list;
-           
         }
 
+        public Task<ISO3166> GetOneAsync(ISO3166 model)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task<ISO3166> GetOneAsync(params object[] keys)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<ISO3166>> GetPageAsync(int pageNumber, int pageSize, params object[] keys)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ISO3166> UpdateAsync(ISO3166 model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

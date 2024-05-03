@@ -11,7 +11,7 @@ namespace WebApplication2.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _configuration;
         private readonly TpContext _context;
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration , TpContext context)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, TpContext context)
         {
             _logger = logger;
             _configuration = configuration;
@@ -20,13 +20,12 @@ namespace WebApplication2.Controllers
 
         public async Task<IActionResult> Index()
         {
-
-            ISO3166DataService ds = new ISO3166DataService(_configuration);
+            ISO3166DataServiceDP ds = new ISO3166DataServiceDP(_configuration);
             List<ISO3166> list = new List<ISO3166>();
             try
             {
-                string[] keys = {};
-                list = await ds.GetModelsAsync(keys);
+                string[] keys = { };
+                list = await ds.GetListAsync(keys);
             }
             catch (Exception e)
             {
@@ -37,13 +36,12 @@ namespace WebApplication2.Controllers
 
         public async Task<IActionResult> IndexC()
         {
-
             ISO3166DataServiceEF ds = new ISO3166DataServiceEF(_context);
             List<ISO3166> list = new List<ISO3166>();
             try
             {
                 string[] keys = { };
-                list = await ds.GetModelsAsync(keys);
+                list = await ds.GetListAsync(keys);
             }
             catch (Exception e)
             {

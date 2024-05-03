@@ -11,7 +11,7 @@ namespace WebApplication2.DataService
         public ISO3166DataServiceEF(TpContext context) => _context = context;
        
 
-        public async Task<List<ISO3166>> GetModelsAsync(params object[] keys)
+        public Task<List<ISO3166>> GetListAsync(params object[] keys)
         {
             //TpContext context = new TpContext(_configuration);
             List<ISO3166> models = new List<ISO3166>();
@@ -19,9 +19,37 @@ namespace WebApplication2.DataService
                 .FromSqlRaw("SELECT top(10) * FROM ISO3166 order by newid()")
                 .AsNoTracking()
                 .ToList();
-            return models;
+            return Task.FromResult(models);
         }
 
+        public Task<ISO3166> CreateAsync(ISO3166 model)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task<bool> DeleteAsync(params object[] keys)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ISO3166> GetOneAsync(ISO3166 model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ISO3166> GetOneAsync(params object[] keys)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<ISO3166>> GetPageAsync(int pageNumber, int pageSize, params object[] keys)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ISO3166> UpdateAsync(ISO3166 model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
