@@ -1,5 +1,6 @@
 using WebApplication2.DbContexts;
 using Microsoft.EntityFrameworkCore;
+using SqlSugar;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +8,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TpContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("TP"))
     );
+builder.Services.AddScoped(provider=> {
+    return new SqlSugarClient(new ConnectionConfig()
+    {
+        ConnectionString = builder.Configuration.GetConnectionString("TP"),
+        DbType = DbType.SqlServer,
+        IsAutoCloseConnection = true        
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

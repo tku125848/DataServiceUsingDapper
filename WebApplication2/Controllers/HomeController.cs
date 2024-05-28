@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using SqlSugar;
 using System.Diagnostics;
 using WebApplication2.DataService;
 using WebApplication2.DbContexts;
@@ -11,11 +12,13 @@ namespace WebApplication2.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _configuration;
         private readonly TpContext _context;
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, TpContext context)
+        private readonly SqlSugarClient _client;
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, TpContext context, SqlSugarClient client)
         {
             _logger = logger;
             _configuration = configuration;
             _context = context;
+            _client = client;
         }
 
         public async Task<IActionResult> Index()
@@ -37,6 +40,21 @@ namespace WebApplication2.Controllers
         public async Task<IActionResult> IndexC()
         {
             ISO3166DataServiceEF ds = new ISO3166DataServiceEF(_context);
+            List<ISO3166> list = new List<ISO3166>();
+            try
+            {
+                string[] keys = { };
+                list = await ds.GetListAsync(keys);
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.ToString());
+            }
+            return Ok(list);
+        }
+        public async Task<IActionResult> IndexS()
+        {
+            ISO3166DataServiceSugar ds = new ISO3166DataServiceSugar(_client);
             List<ISO3166> list = new List<ISO3166>();
             try
             {
